@@ -1,0 +1,7 @@
+---
+# Main playbook for the time-client role
+- name: Configure the ntp client
+  hosts: linux
+  become: true
+  roles:
+    - role: time-client

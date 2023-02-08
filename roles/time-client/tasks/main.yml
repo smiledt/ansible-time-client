@@ -1,0 +1,24 @@
+---
+# tasks file for time-client
+
+- name: Ensure that the ntp package is installed
+  package:
+    name: ntp
+
+- name: Remove default ntp servers
+  lineinfile:
+    path: /etc/ntp.conf
+    regexp: 'ubuntu.pool.ntp.org'
+    state: absent
+
+- name: Add new ntp servers
+  lineinfile:
+    path: /etc/ntp.conf
+    line: "pool {{ item }} iburst" 
+    insertbefore: \# Use Ubuntu's ntp server as a fallback.
+  with_items: "{{ ntp_servers }}"
+  notify: Restart ntp
+
+- name: Set the timezone to {{ timezone }}
+  timezone:
+    name: "{{ timezone }}"

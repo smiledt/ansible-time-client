@@ -1,0 +1,7 @@
+---
+# handlers file for time-client
+
+- name: Restart ntp
+  service:
+    name: ntp
+    state: restarted
