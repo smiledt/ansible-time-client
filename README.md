@@ -1,38 +1,41 @@
-Role Name
-=========
+# Time-Client
 
-A brief description of the role goes here.
+A role to set up NTP on my ubuntu servers.
 
-Requirements
-------------
+## Requirements
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Sudo access to the server. 
 
-Role Variables
---------------
+## Required variables
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Required variables are listed here, along with default example values. Any of these defaults can be overwritten by using the vars role directory. 
 
-Dependencies
-------------
+    ntp_servers:
+      - 0.us.pool.ntp.org
+      - 1.us.pool.ntp.org
+      - 2.us.pool.ntp.org
+      - 3.us.pool.ntp.org
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+    timezone: America/Chicago
+## Dependencies
 
-Example Playbook
-----------------
+None.
+
+## Example Playbook
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
+    ---
+    - name: Configure the ntp client
+      hosts: linux
+      become: true
       roles:
-         - { role: username.rolename, x: 42 }
+        - role: time-client
 
-License
--------
+### License
 
-BSD
+MIT
 
-Author Information
-------------------
+### Author Information
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Derek Smiley - Network Analyst, avid homelabber, and aspiring Systems Administrator.
